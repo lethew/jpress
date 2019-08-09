@@ -1,0 +1,7 @@
+id=com.iuuxx.addon.library
+title=图书馆
+description=个人图书馆
+author=吴昭
+authorWebsite=http://www.iuuxx.com
+version=1.0.0
+versionCode=1

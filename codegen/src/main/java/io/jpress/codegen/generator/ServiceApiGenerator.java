@@ -94,24 +94,17 @@ public class ServiceApiGenerator extends BaseModelGenerator {
     @Override
     protected void writeToFile(TableMeta tableMeta) throws IOException {
         File dir = new File(baseModelOutputDir);
-        if (!dir.exists()) {
-            dir.mkdirs();
+        if (!(dir.exists() || dir.mkdirs())) {
+            throw new IOException("Folder " + baseModelOutputDir+" not fount, and create it error");
         }
 
         String target = baseModelOutputDir + File.separator + tableMeta.modelName + "Service" + ".java";
 
         File targetFile = new File(target);
-        if (targetFile.exists()) {
-            return;
-        }
-
-        FileWriter fw = new FileWriter(target);
-        try {
-            fw.write(tableMeta.baseModelContent);
-        } finally {
-            fw.close();
+        if (!targetFile.exists()) {
+            try(FileWriter fw = new FileWriter(target)) {
+                fw.write(tableMeta.baseModelContent);
+            }
         }
     }
-
-
 }

@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class ServiceProviderGenerator extends BaseModelGenerator {
 
@@ -53,9 +54,7 @@ public class ServiceProviderGenerator extends BaseModelGenerator {
         engine.addSharedObject("getterTypeMap", getterTypeMap);
         engine.addSharedObject("javaKeyword", javaKeyword);
 
-        for (TableMeta tableMeta : tableMetas) {
-            genBaseModelContent(tableMeta);
-        }
+        tableMetas.forEach(this::genBaseModelContent);
         writeToFile(tableMetas);
     }
 
@@ -78,23 +77,17 @@ public class ServiceProviderGenerator extends BaseModelGenerator {
     @Override
     protected void writeToFile(TableMeta tableMeta) throws IOException {
         File dir = new File(baseModelOutputDir);
-        if (!dir.exists()) {
-            dir.mkdirs();
+        if (!(dir.exists() || dir.mkdirs())) {
+            throw new IOException("Folder " + baseModelOutputDir+" not fount, and create it error");
         }
 
         String target = baseModelOutputDir + File.separator + tableMeta.modelName + "ServiceProvider" + ".java";
 
         File targetFile = new File(target);
-        if (targetFile.exists()) {
-            return;
-        }
-
-
-        FileWriter fw = new FileWriter(target);
-        try {
-            fw.write(tableMeta.baseModelContent);
-        } finally {
-            fw.close();
+        if (!targetFile.exists()) {
+            try(FileWriter fw = new FileWriter(target)) {
+                fw.write(tableMeta.baseModelContent);
+            }
         }
     }
 }
