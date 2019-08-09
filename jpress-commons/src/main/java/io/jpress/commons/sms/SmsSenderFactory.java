@@ -44,6 +44,8 @@ public class SmsSenderFactory {
                 return new AliyunSmsSender();
             case JPressConsts.SMS_TYPE_QCLOUD:
                 return new QCloudSmsSender();
+            case JPressConsts.SMS_TYPE_SUBMAIL:
+                return new SubmailSmsSender();
         }
 
         //其他通过SPI扩展机制加载

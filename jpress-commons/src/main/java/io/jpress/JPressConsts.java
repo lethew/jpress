@@ -91,6 +91,7 @@ public class JPressConsts {
 
     public static final String SMS_TYPE_ALIYUN = "aliyun"; //短信服务商：阿里云
     public static final String SMS_TYPE_QCLOUD = "qcloud"; //短信服务商：腾讯云
+    public static final String SMS_TYPE_SUBMAIL = "submail"; //短信服务商：赛邮
 
     /**
      * 用到的cookie name 常量
