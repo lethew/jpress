@@ -494,4 +494,8 @@ public class _ArticleController extends AdminControllerBase {
         render(articleService.doChangeStatus(id, Article.STATUS_NORMAL) ? OK : FAIL);
     }
 
+    @AdminMenu(text = "支付", groupId = "article", order = 6)
+    public void payList() {
+        render("article/paylist.html");
+    }
 }

@@ -1,0 +1,52 @@
+#@layout()
+
+#define css()
+<style>
+    #uploader {
+        height: 230px;
+    }
+
+    .myPanel {
+        font-size: 25px;
+        color: #ccc;
+        text-align: center;
+        padding-top: 60px;
+    }
+
+</style>
+#end
+
+#define script()
+<script src="#(CPATH)/static/components/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="#(CPATH)/static/components/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+<script>
+    $("#import").click(function () {
+        $.post('#(CPATH)/admin/setting/tools/b3blog/doImport',{},function (data,status) {
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    })
+</script>
+#end
+
+#define content()
+<div class="content-wrapper">
+
+    <section class="content-header">
+        <h1>
+            B3Blog文章导入
+            <small>B3Blog Import</small>
+        </h1>
+    </section>
+
+    <section class="content">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <button id="import">import</button>
+            </div>
+        </div>
+
+    </section>
+
+</div>
+#end
